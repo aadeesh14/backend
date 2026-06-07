@@ -10,10 +10,16 @@ import connectDB from "./db/index.js";
 dotenv.config({
     path:'./.env'
 })
-console.log("MONGODB_URI:", process.env.MONGODB_URI)
-console.log("DB_NAME:", DB_NAME)
-connectDB()
 
+connectDB()
+.then(()=>{
+    app.listen(process.env.PORT || 8000,()=>{
+        console.log(`Server Is Running At Port : ${process.env.PORT}`);
+    })
+})
+.catch((err)=>{
+    console.log("MONGO DB Connection Failed!",err);
+})
 
 /*
 ( async () => {
